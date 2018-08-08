@@ -45,7 +45,7 @@ module "west2-2" {
 
   project    = "${var.project}"
   region     = "europe-west2"
-  zone       = "b"
+  zone       = "a"
   hostnumber = 2
 
   scylla_repo_url = "${var.scylla_repo_url}"
