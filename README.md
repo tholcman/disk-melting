@@ -1,26 +1,18 @@
 # disk breaker
 
-Update `west1.tfvars` & `west2.tfvars`
+Update `terraform.tfvars` with project you want to start instances in. You may start more instances to get error faster see `main.tf` line 30 and below
+
 ```
 export CREDS_PATH=~/.config/gcloud/credentials.json
 export GOOGLE_CREDENTIALS=$(cat ${CREDS_PATH})
 
 terraform init
-terraform workspace new west1
-terraform apply -var-file west1.tfvars
-
-terraform workspace new west2
-terraform apply -var-file west2.tfvars
+terraform apply
 ```
 
-in less then 24 hours it should be broken, check dmesg.
+in usually takes less then 24 hours broke, check dmesg.
 
 To destroy resources
-
 ```
-terraform workspace select west2
-terraform destroy
-
-terraform workspace select west1
 terraform destroy
 ```

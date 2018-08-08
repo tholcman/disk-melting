@@ -863,10 +863,12 @@ read -r -d '' STRESSTEST <<'STRESSTEST'
 export NODE=${IP}
 export COUNT=150000000
 
-cassandra-stress write \
+
+
+taskset -c 32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49 cassandra-stress write \
     no-warmup cl=ONE \
     n=$COUNT \
-    -mode native cql3 -rate threads=50 \
+    -mode native cql3 -rate threads=40 \
     -schema keyspace="keyspace1" \
     -col n=FIXED\(1\) size=FIXED\(5000\)  \
     -pop seq=0..$COUNT \
@@ -874,11 +876,11 @@ cassandra-stress write \
     -node $NODE
 
 while true ; do
-cassandra-stress mixed \
+taskset -c 32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49 cassandra-stress mixed \
         ratio\(write=1,read=2\) \
         no-warmup cl=ONE \
         n=$COUNT \
-        -mode native cql3 -rate threads=80 \
+        -mode native cql3 -rate threads=60 \
         -schema keyspace="keyspace1" \
         -col n=FIXED\(1\) size=FIXED\(5000\)  \
         -pop dist=UNIFORM\(1..$COUNT\)\
@@ -889,8 +891,7 @@ STRESSTEST
 echo "$STRESSTEST" >/stress.sh
 chmod +x /stress.sh
 
-sleep 120
+sleep 60
 
-cd /tmp
-nohup /stress.sh &
+/stress.sh &
 
