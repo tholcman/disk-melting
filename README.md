@@ -10,7 +10,7 @@ terraform init
 terraform apply
 ```
 
-in usually takes less then 24 hours broke, check dmesg.
+it usually takes less then 24 hours to broke, check dmesg.
 
 To destroy resources
 ```
