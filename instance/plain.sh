@@ -868,7 +868,7 @@ export COUNT=150000000
 taskset -c 32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49 cassandra-stress write \
     no-warmup cl=ONE \
     n=$COUNT \
-    -mode native cql3 -rate threads=30 \
+    -mode native cql3 -rate threads=10 \
     -schema keyspace="keyspace1" \
     -col n=FIXED\(1\) size=FIXED\(5000\)  \
     -pop seq=0..$COUNT \
@@ -880,7 +880,7 @@ taskset -c 32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49 cassandra-stres
         ratio\(write=1,read=2\) \
         no-warmup cl=ONE \
         n=$COUNT \
-        -mode native cql3 -rate threads=40 \
+        -mode native cql3 -rate threads=20 \
         -schema keyspace="keyspace1" \
         -col n=FIXED\(1\) size=FIXED\(5000\)  \
         -pop dist=UNIFORM\(1..$COUNT\)\
